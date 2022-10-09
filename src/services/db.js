@@ -1,5 +1,7 @@
-const Sequalize = require('sequelize');
-const sequalize = new Sequalize('postgres', 'postgres', 'postgres', {
+import {Sequelize} from "sequelize";
+
+const sequalize = new Sequelize('postgres', 'postgres', 'postgres', {
+    port: 5431,
     host: 'localhost',
     dialect: 'postgres',
     pool: {
@@ -8,10 +10,6 @@ const sequalize = new Sequalize('postgres', 'postgres', 'postgres', {
         acquire: 30000,
         idle: 10000
     }
-});
-const database = {}
+})
 
-database.Sequalize = Sequalize
-database.sequalize = sequalize
-
-module.exports = database;
+export default sequalize;

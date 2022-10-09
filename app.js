@@ -1,13 +1,10 @@
-require('dotenv').config();
-const bodyParser = require('body-parser');
-const express = require('express');
-const db = require('./src/services/db');
-
-const Router = require('./src/routes/router');
+import {config} from "dotenv";
+import express from 'express';
+import db from './src/services/db.js'
+import routes from './src/routes/router.js'
 const app = express();
 
-
-return db.sequalize.sync().then((sa) => {
+  db.sync({force: true}).then(() => {
   console.log('Database created');
 }).then(() => {
 
@@ -15,9 +12,8 @@ return db.sequalize.sync().then((sa) => {
 
   app.use(express.urlencoded({extended: true}));
 
-  app.use(Router);
-
-  app.listen(3000, function () {
+  app.use(routes);
+  app.listen(3000,  ()=> {
     console.log('Example app listening on port 3000!');
   });
   return app

@@ -1,34 +1,37 @@
-const BookModel = require('../models/books')
+import BookModel from '../models/books.js'
 
-module.exports = {
+const create = (data) => {
+  return BookModel.create(data).then(result => {
+    return {
+      id: result.id,
+      name: result.name,
+    }
+  })
+}
 
-  createBook: (data) => {
-    return BookModel.create(data).then(result => {
+const getAll = () => {
+
+  return BookModel.findAll().then(result => {
+    return result.map(book => {
       return {
-        id: result.id,
-        name: result.name,
+        id: book.id,
+        name: book.name,
       }
     })
-  },
+  })
+}
+const getBookById = (id) => {
+  return BookModel.findByPk(id).then(result => {
+    return {
+      id: result.id,
+      name: result.name,
+      score: result.score
+    }
+  })
+}
 
-  getAllBooks: () => {
-
-    return BookModel.findAll().then(result => {
-      return result.map(book => {
-        return {
-          id: book.id,
-          name: book.name,
-        }
-      })
-    })
-  },
-  getBookById: (id) => {
-    return BookModel.findByPk(id).then(result => {
-      return {
-        id: result.id,
-        name: result.name,
-        score: result.score
-      }
-    })
-  },
+export {
+  create,
+  getAll,
+  getBookById
 }

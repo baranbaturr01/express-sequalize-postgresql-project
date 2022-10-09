@@ -1,23 +1,22 @@
-const database = require('../services/db');
-const Sequelize = require('sequelize');
-const UserBook = require('./user-books');
+import db from '../services/db.js';
+import {DataTypes} from "sequelize";
+import UserBook from './user-books.js';
 
-const Book = database.sequalize.define('books', {
+const Book = db.define('books', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
   name: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   },
   score: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     default: -1,
     notNull: true
   },
 });
-//aliases
 Book.hasMany(UserBook,
   {
     as: 'userBooks', foreignKey: 'book_id'
@@ -25,4 +24,4 @@ Book.hasMany(UserBook,
 UserBook.belongsTo(Book, {foreignKey: 'book_id'});
 
 
-module.exports = Book;
+export default Book;

@@ -1,15 +1,15 @@
-const database = require('../services/db');
-const Sequelize = require('sequelize');
+import db from '../services/db.js';
+import {Sequelize,DataTypes} from "sequelize";
 
-const UserBook = database.sequalize.define('user-books', {
+const UserBook = db.define('user-books', {
 
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     user_id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       notNull: true,
       references: {
         model: 'users',
@@ -17,7 +17,7 @@ const UserBook = database.sequalize.define('user-books', {
       }
     },
     book_id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       notNull: true,
       references: {
         model: 'books',
@@ -25,14 +25,14 @@ const UserBook = database.sequalize.define('user-books', {
       }
     },
     is_read: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     user_score: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     }
   },
   {
     timestamps: false
   });
 
-module.exports = UserBook;
+export default UserBook;

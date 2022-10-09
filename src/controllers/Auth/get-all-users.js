@@ -1,8 +1,8 @@
-const UserService= require('../../services/UserService');
-module.exports = (req, res, next) => {
+import {getAllUsers,deleteById,findByName,create,getUserById} from '../../services/UserService';
 
-  return UserService.getAllUsers().then(user=>{
+export default (req, res, next) => {
+
+  return getAllUsers().then(user=>{
     return res.json(user)
   })
-
 }

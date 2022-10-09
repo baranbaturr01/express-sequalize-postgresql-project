@@ -1,16 +1,17 @@
-const database = require('../services/db');
-const Sequelize = require('sequelize');
-const UserBook = require('./user-books');
+import db from '../services/db.js';
 
-const User = database.sequalize.define('users', {
+import {Sequelize,DataTypes} from 'sequelize';
+import UserBook from './user-books.js';
+
+const User = db.define('users', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     foreignKey: true
   },
   name: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   }
 });
 
@@ -20,4 +21,4 @@ User.hasMany(UserBook,
   });
 UserBook.belongsTo(User, {foreignKey: 'user_id'});
 
-module.exports = User;
+export default User;

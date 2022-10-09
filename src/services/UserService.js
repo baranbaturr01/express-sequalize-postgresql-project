@@ -1,33 +1,33 @@
-const userModel = require('../models/users');
-const userBookModel = require('../models/user-books');
-const bookModel = require('../models/books');
-module.exports = {
-  create: (data) => {
-    return userModel.create(data).then(result => {
+import User from '../models/users.js';
+import UserBookModel from '../models/user-books.js';
+import BookModel from '../models/books.js';
+
+  const create= (data) => {
+    return User.create(data).then(result => {
       return result;
     })
-  },
-  findByName: (name) => {
-    return userModel.findOne({
+  }
+  const findByName= (name) => {
+    return User.findOne({
       where: {
         name: name
       }
     }).then(result => {
       return result;
     })
-  },
-  deleteById: (id) => {
-    return userModel.destroy({
+  }
+ const deleteById= (id) => {
+    return User.destroy({
       where: {
         id: id
       }
     }).then(result => {
       return result;
     })
-  },
+  }
 
-  getAllUsers: () => {
-    return userModel.findAll().then(users => {
+ const  getAllUsers= () => {
+    return User.findAll().then(users => {
 
       return users.map(user => {
         return {
@@ -36,18 +36,18 @@ module.exports = {
         }
       })
     })
-  },
-  getUserById: (id) => {
+  }
+  const getUserById= (id) => {
 
-    return userModel.findOne({
+    return User.findOne({
       where: {
         id: id
       },
       include: {
-        model: userBookModel,
+        model: UserBookModel,
         as: 'userBooks',
         include: {
-          model: bookModel,
+          model: BookModel,
           as: 'book'
         }
 
@@ -56,4 +56,11 @@ module.exports = {
       return user;
     })
   }
-}
+
+  export {
+    create,
+    findByName,
+    deleteById,
+    getAllUsers,
+    getUserById
+  }
