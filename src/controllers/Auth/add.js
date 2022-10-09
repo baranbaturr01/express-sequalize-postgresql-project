@@ -1,5 +1,6 @@
 const UserModel = require('../../models/users');
 const userService = require('../../services/UserService');
+
 module.exports = (req, res, next) => {
 
     const name = req.body.name

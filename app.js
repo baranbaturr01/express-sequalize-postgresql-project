@@ -8,22 +8,21 @@ const app = express();
 
 
 return db.sequalize.sync().then((sa) => {
-    console.log('Database created');
+  console.log('Database created');
 }).then(() => {
 
-    app.use(express.json());
+  app.use(express.json());
 
-    app.use(express.urlencoded({ extended: true }));
+  app.use(express.urlencoded({extended: true}));
 
-    app.use('/mobile', Router);
+  app.use(Router);
 
-
-    app.listen(3006, function () {
-        console.log('Example app listening on port 3006!');
-    });
-    return app
+  app.listen(3000, function () {
+    console.log('Example app listening on port 3000!');
+  });
+  return app
 }).catch(err => {
     console.log("ERORRRR!!!", err);
-}
+  }
 )
 
